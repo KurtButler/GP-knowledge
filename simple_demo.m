@@ -17,7 +17,7 @@ gp = fitrgp(X_train,y_train);
 subplot(2,1,1)
 plot(X_train,y_train,'ro', X_pred,y_pred,'b-')
 quick_patch(X_pred,y_pred,2*y_std,'b')
-title('GPR Model')
+title('GPR model')
 xlabel('x')
 ylabel('y')
 
