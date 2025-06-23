@@ -5,3 +5,35 @@ This repository contains the code for our project on Gaussian process knowledge 
 
 ## Description
 This repository contains Matlab code that implements knowledge score analysis for Gaussian process regression (GPR) models. Our main contribution is a simple function, `knowledge(gp,X)`, that computes knowledge scores for the GPR model `gp` for each location in the matrix `X` alongside the predictive mean and standard deviation. Computing predictions using this function calls the `predict(gp,X)` function that is native to Matlab, and then additionally computes the variance reduction scores for each prediction.
+
+A minimal demo
+```matlab
+%% Generate data
+% Training data
+X_train = rand(15,1);
+y_train = X_train + 0.1*randn(15,1);
+
+% Test data
+X_pred= linspace(0,2,30)';
+
+%% Train model and compute predictions
+% Fit GPR model 
+gp = fitrgp(X_train,y_train);
+
+% Make predictions
+[y_pred,y_std,G_scores] = knowledge(gp,X_pred);
+
+%% Plot results
+subplot(2,1,1)
+plot(X_train,y_train,'ro', X_pred,y_pred,'b-')
+quick_patch(X_pred,y_pred,2*y_std,'b') % Adds shaded region for GPR predictions
+title('GPR Model')
+xlabel('x')
+ylabel('y')
+
+subplot(2,1,2)
+plot(X_pred,G_scores,'b-')
+title('Knowledge scores')
+xlabel('x')
+ylabel('G(x,D)')
+```
