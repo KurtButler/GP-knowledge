@@ -3,10 +3,15 @@ This repository contains the code for our project on Gaussian process knowledge 
 
 > Probabilistic models are often used to make predictions in regions of the data space where no observations are available, but it is not always clear whether such predictions are well-informed by previously seen data. In this paper, we propose a knowledge score for predictions from Gaussian process regression (GPR) models that quantifies the extent to which observing data have reduced our uncertainty about a prediction. The knowledge score is interpretable and naturally bounded between 0 and 1. We demonstrate in several experiments that the knowledge score can  anticipate when predictions from a GPR model are accurate, and that this anticipation improves performance in tasks such as anomaly detection, extrapolation, and missing data imputation.
 
-## Description
+## A simple example
 This repository contains Matlab code that implements knowledge score analysis for Gaussian process regression (GPR) models. Our main contribution is a simple function, `knowledge(gp,X)`, that computes knowledge scores for the GPR model `gp` for each location in the matrix `X` alongside the predictive mean and standard deviation. Computing predictions using this function calls the `predict(gp,X)` function that is native to Matlab, and then additionally computes the variance reduction scores for each prediction.
 
-A minimal demo
+For example, this figure
+
+![](https://github.com/KurtButler/GP-knowledge/blob/main/images/minimal_example.png)
+
+is produced by the following simple program
+
 ```matlab
 %% Generate data
 % Training data
@@ -37,3 +42,4 @@ title('Knowledge scores')
 xlabel('x')
 ylabel('G(x,D)')
 ```
+
